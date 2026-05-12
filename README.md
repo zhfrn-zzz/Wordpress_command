@@ -1,20 +1,20 @@
-#Hai
+# Hai
 ## Langkah-langkah di bawah di jalankan berurutan.
 
 ### 1. Install LAMP + WordPress (satu blok, jalankan satu per satu)
 
+Install semua dependency
 ```bash
-# Install semua dependency
 apt install -y apache2 mysql-server php php-mysql php-curl php-gd php-mbstring php-xml php-zip libapache2-mod-php
 ```
 
+Buat database (KETIK MANUAL, jangan copy-paste dari browser)
 ```bash
-# Buat database (KETIK MANUAL, jangan copy-paste dari browser)
 sudo mysql -e "CREATE DATABASE wordpress; CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'P@ssw0rd123'; GRANT ALL ON wordpress.* TO 'wpuser'@'localhost'; FLUSH PRIVILEGES;"
 ```
 
+Download & pindahkan WordPress
 ```bash
-# Download & pindahkan WordPress
 cd /tmp
 wget -q https://wordpress.org/latest.tar.gz
 tar -xzf latest.tar.gz
@@ -22,13 +22,13 @@ mv wordpress /var/www/html/
 chown -R www-data:www-data /var/www/html/wordpress
 ```
 
+Aktifkan mod rewrite
 ```bash
-# Aktifkan mod rewrite
 a2enmod rewrite && systemctl restart apache2
 ```
 
+Konfigurasi wp-config
 ```bash
-# Konfigurasi wp-config
 cd /var/www/html/wordpress
 cp wp-config-sample.php wp-config.php
 sed -i "s/database_name_here/wordpress/" wp-config.php
@@ -44,7 +44,7 @@ Buka → `http://192.168.10.3/wordpress` → isi wizard → selesai.
 
 ---
 
-## Pelajaran Penting dari Percakapan Kita
+## Troubleshooting
 
 | Masalah | Solusi |
 |---|---|
