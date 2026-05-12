@@ -8,7 +8,7 @@ Install semua dependency
 apt install -y apache2 mysql-server php php-mysql php-curl php-gd php-mbstring php-xml php-zip libapache2-mod-php
 ```
 
-Buat database (KETIK MANUAL, jangan copy-paste dari browser)
+Buat database
 ```bash
 sudo mysql -e "CREATE DATABASE wordpress; CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'P@ssw0rd123'; GRANT ALL ON wordpress.* TO 'wpuser'@'localhost'; FLUSH PRIVILEGES;"
 ```
