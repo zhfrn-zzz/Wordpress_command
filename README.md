@@ -1,2 +1,53 @@
-# Wordpress_command
-Repositori untuk instalasi wordpress di ubuntu 24.xx secara cepat dan tepat.
+#Hai
+## Langkah-langkah di bawah di jalankan berurutan.
+
+### 1. Install LAMP + WordPress (satu blok, jalankan satu per satu)
+
+```bash
+# Install semua dependency
+apt install -y apache2 mysql-server php php-mysql php-curl php-gd php-mbstring php-xml php-zip libapache2-mod-php
+```
+
+```bash
+# Buat database (KETIK MANUAL, jangan copy-paste dari browser)
+sudo mysql -e "CREATE DATABASE wordpress; CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'P@ssw0rd123'; GRANT ALL ON wordpress.* TO 'wpuser'@'localhost'; FLUSH PRIVILEGES;"
+```
+
+```bash
+# Download & pindahkan WordPress
+cd /tmp
+wget -q https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+mv wordpress /var/www/html/
+chown -R www-data:www-data /var/www/html/wordpress
+```
+
+```bash
+# Aktifkan mod rewrite
+a2enmod rewrite && systemctl restart apache2
+```
+
+```bash
+# Konfigurasi wp-config
+cd /var/www/html/wordpress
+cp wp-config-sample.php wp-config.php
+sed -i "s/database_name_here/wordpress/" wp-config.php
+sed -i "s/username_here/wpuser/" wp-config.php
+sed -i "s/password_here/P@ssw0rd123/" wp-config.php
+```
+
+---
+
+### 2. Selesaikan di Browser
+
+Buka → `http://192.168.10.3/wordpress` → isi wizard → selesai.
+
+---
+
+## Pelajaran Penting dari Percakapan Kita
+
+| Masalah | Solusi |
+|---|---|
+| SSH gagal | Cek username yang dibuat saat install, bukan asumsi `user`/`root` |
+| Root login ditolak | Ubuntu 24.04 default block root SSH — buat user biasa + tambah ke sudo |
+| Copy-paste dari browser | Selalu ketik manual atau paste ke notepad dulu — hyperlink merusak command |
