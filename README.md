@@ -16,9 +16,17 @@ sudo mysql -e "CREATE DATABASE wordpress; CREATE USER 'wpuser'@'localhost' IDENT
 Download & pindahkan WordPress
 ```bash
 cd /tmp
+```
+```bash
 wget -q https://wordpress.org/latest.tar.gz
+```
+```bash
 tar -xzf latest.tar.gz
+```
+```bash
 mv wordpress /var/www/html/
+```
+```bash
 chown -R www-data:www-data /var/www/html/wordpress
 ```
 
@@ -30,9 +38,17 @@ a2enmod rewrite && systemctl restart apache2
 Konfigurasi wp-config
 ```bash
 cd /var/www/html/wordpress
+```
+```bash
 cp wp-config-sample.php wp-config.php
+```
+```bash
 sed -i "s/database_name_here/wordpress/" wp-config.php
+```
+```bash
 sed -i "s/username_here/wpuser/" wp-config.php
+```
+```bash
 sed -i "s/password_here/P@ssw0rd123/" wp-config.php
 ```
 
